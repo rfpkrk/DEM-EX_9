@@ -1,0 +1,83 @@
+﻿<Window x:Class="MilkBase_9.UserManagementWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MilkBase_9"
+        mc:Ignorable="d"
+                Title="Управление пользователями"
+        Height="550" Width="850"
+        WindowStartupLocation="CenterOwner"
+        MinHeight="450" MinWidth="750">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="#2C3E50" CornerRadius="5" Padding="15" Margin="0,0,0,10">
+            <TextBlock Text="Управление пользователями системы" FontSize="18" FontWeight="Bold" Foreground="White"/>
+        </Border>
+
+        <DataGrid x:Name="UsersGrid" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True"
+                  SelectionChanged="UsersGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                <DataGridTextColumn Header="Логин" Binding="{Binding Login}" Width="120"/>
+                <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}" Width="200"/>
+                <DataGridTextColumn Header="Роль" Binding="{Binding Role}" Width="100"/>
+                <DataGridCheckBoxColumn Header="Заблокирован" Binding="{Binding IsBlocked}" Width="80"/>
+                <DataGridTextColumn Header="Попыток" Binding="{Binding FailedAttempts}" Width="60"/>
+                <DataGridTextColumn Header="Последний вход" Binding="{Binding LastLoginDate, StringFormat=dd.MM.yyyy HH:mm}" Width="150"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Border Grid.Row="2" Background="#F8F9FA" CornerRadius="5" Padding="15" Margin="0,10,0,0">
+            <StackPanel>
+                <TextBlock Text="Редактирование пользователя" FontSize="14" FontWeight="Bold" Margin="0,0,0,10"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Логин:" VerticalAlignment="Center"/>
+                    <TextBox x:Name="txtLogin" Grid.Row="0" Grid.Column="1" Margin="5"/>
+                    <TextBlock Grid.Row="0" Grid.Column="2" Text="Пароль:" VerticalAlignment="Center"/>
+                    <PasswordBox x:Name="txtPassword" Grid.Row="0" Grid.Column="3" Margin="5"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="ФИО:" VerticalAlignment="Center"/>
+                    <TextBox x:Name="txtFullName" Grid.Row="1" Grid.Column="1" Margin="5"/>
+                    <TextBlock Grid.Row="1" Grid.Column="2" Text="Роль:" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="cmbRole" Grid.Row="1" Grid.Column="3" Margin="5" SelectedIndex="0">
+                        <ComboBoxItem Content="Пользователь"/>
+                        <ComboBoxItem Content="Администратор"/>
+                    </ComboBox>
+                    <CheckBox x:Name="chkIsBlocked" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Заблокирован" Margin="5" VerticalAlignment="Center"/>
+                </Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
+                    <Button x:Name="btnAdd" Click="BtnAdd_Click" Background="#27AE60" Foreground="White" Padding="12,6" Margin="5" Cursor="Hand">
+                        <TextBlock Text="Добавить"/>
+                    </Button>
+                    <Button x:Name="btnUpdate" Click="BtnUpdate_Click" Background="#3498DB" Foreground="White" Padding="12,6" Margin="5" Cursor="Hand" IsEnabled="False">
+                        <TextBlock Text="Обновить"/>
+                    </Button>
+                    <Button x:Name="btnUnblock" Click="BtnUnblock_Click" Background="#E67E22" Foreground="White" Padding="12,6" Margin="5" Cursor="Hand" IsEnabled="False">
+                        <TextBlock Text="Снять блокировку"/>
+                    </Button>
+                    <Button x:Name="btnDelete" Click="BtnDelete_Click" Background="#E74C3C" Foreground="White" Padding="12,6" Margin="5" Cursor="Hand" IsEnabled="False">
+                        <TextBlock Text="Удалить"/>
+                    </Button>
+                    <Button x:Name="btnRefresh" Click="BtnRefresh_Click" Background="#95A5A6" Foreground="White" Padding="12,6" Margin="5" Cursor="Hand">
+                        <TextBlock Text=" Обновить"/>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
